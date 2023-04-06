@@ -1,0 +1,74 @@
+﻿@model List<ContatoModel>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div>
+<a asp-controller="Contato" asp-action="Criar" type="button" class="btn btn-inverse-success btn-fw">Criar</a>
+</div>
+
+<div class="row ">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Order Status</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th> Contato Name </th>
+                                <th> E-mail </th>
+                                <th> Phone Number </th>
+                                <th> Job </th>
+                                <th> Observation </th>
+                                <th> Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any()) 
+                            {
+                                foreach (ContatoModel contato in Model)
+                                {
+                               <tr>
+                                <td>
+                                    @contato.Id
+                                </td>
+                                <td>
+                                    <img src="@contato.ImgUrl" alt="image" />
+                                    <span class="pl-2">@contato.Name</span>
+                                </td>
+                                
+                                <td> @contato.Email </td>
+                                <td> @contato.Phone </td>
+                                <td> @contato.Job </td>
+                                <td> @contato.Observation </td>
+                                <td>
+                                    <a asp-controller="Contato" asp-action="Editar" asp-route-id="@contato.Id" type="button" class="badge btn-inverse-success btn-fw">Edit</a>
+
+                                    <div class="badge badge-outline-danger">Del</div>
+                                    <a asp-controller="Contato" asp-action="Ver" asp-route-id="@contato.Id" type="button" class="badge btn-inverse-info btn-fw">View</a>
+                                </td>
+                            </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8">
+                                        <h4 class="text-center">Nenhum registro encontrado</h4>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
